@@ -1,7 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainScreen from './src/screens/MainScreen';
+import AboutScreen from './src/screens/AboutScreen';
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+   return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen
+          name="Main"
+          component={MainScreen}
+          options={{ title: 'Currency Converter' }}
+        />
+        <Stack.Screen
+          name="About"
+          component={AboutScreen}
+          options={{ title: 'About' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
  
 }
 
