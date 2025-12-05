@@ -8,8 +8,8 @@ const AboutScreen = () => {
       <Text style={styles.studentId}>Student ID: 101487402</Text>
       <Text style={styles.name}>Name:- sana karnleia</Text>
       <Text style={styles.studentId}>Student ID: 101487075</Text>
-       <Text>About This Application</Text>
-      <Text >
+       <Text style={styles.descriptionTitle}>About This Application</Text>
+      <Text style={styles.description}>
         This application converts an amount from one currency to another using
         live exchange rates from FreeCurrencyAPI. The user enters a base
         currency code, a destination currency code, and an amount. The app
@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
             backgroundColor: '#fff',
         },
      header: {
-    fontSize: 28,
-    fontWeight: '800',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
+            fontSize: 28,
+            fontWeight: '800',
+            marginBottom: 20,
+            textAlign: 'center',
+        },
     name: {
             fontSize: 22,
             fontWeight: '700',
@@ -43,6 +43,15 @@ const styles = StyleSheet.create({
             fontSize: 16,
             marginBottom: 16,
         },
+    descriptionTitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        marginBottom: 8,
+    },
+    description: {
+        fontSize: 15,
+        lineHeight: 22,
+    },
 });
 
 export default AboutScreen;
