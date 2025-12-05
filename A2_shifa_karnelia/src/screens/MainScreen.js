@@ -9,6 +9,9 @@ import {
 
 import LabeledInput from '../components/LabeledInput';
 
+//personal key
+const API_KEY = 'fca_live_oArHFRyRp3VirauoebhqQra148zwQvtpfw3GR7Rg';
+
 const MainScreen = ({ navigation }) => {
 
     const [baseCurrency, setBaseCurrency] = useState('CAD');
@@ -20,7 +23,74 @@ const MainScreen = ({ navigation }) => {
   const [exchangeRate, setExchangeRate] = useState(null);
 
 
+const validateInputs = () => {
+    setErrorMsg('');
 
+    const currencyRegex = /^[A-Z]{3}$/;
+
+    if (!currencyRegex.test(baseCurrency)) {
+      return 'Base currency must be a 3-letter uppercase ISO code (e.g., CAD).';
+    }
+
+    if (!currencyRegex.test(destCurrency)) {
+      return 'Destination currency must be a 3-letter uppercase ISO code (e.g., USD).';
+    }
+
+    const amt = parseFloat(amount);
+    if (isNaN(amt) || amt <= 0) {
+      return 'Amount must be a positive number.';
+    }
+
+    return '';
+  };
+
+  const handleConvert = async () => {
+    const validationError = validateInputs();
+    if (validationError) {
+      setErrorMsg(validationError);
+      return;
+    }
+
+    setLoading(true);
+    setErrorMsg('');
+    setConvertedAmount(null);
+    setExchangeRate(null);
+
+    try {
+      const url = `https://api.freecurrencyapi.com/v1/latest?apikey=${API_KEY}&base_currency=${baseCurrency}&currencies=${destCurrency}`;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Expected shape: { data: { "USD": 0.75, ... } }
+      if (!data || !data.data || data.data[destCurrency] == null) {
+        throw new Error('Exchange rate not found for the given currency.');
+      }
+
+      const rate = data.data[destCurrency];
+      const amt = parseFloat(amount);
+      const converted = amt * rate;
+
+      setExchangeRate(rate);
+      setConvertedAmount(converted);
+    } catch (error) {
+      const msg = error.message || '';
+      if (msg.includes('Network request failed')) {
+        setErrorMsg('Network error: please check your internet connection.');
+      } else if (msg.toLowerCase().includes('apikey')) {
+        setErrorMsg('Invalid API key: please verify your FreeCurrencyAPI key.');
+      } else {
+        setErrorMsg(msg || 'Something went wrong. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
+};
 
      return (
      <View style={styles.container}>
