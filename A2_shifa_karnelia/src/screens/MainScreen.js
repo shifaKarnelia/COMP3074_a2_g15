@@ -130,7 +130,7 @@ const validateInputs = () => {
 
       <TouchableOpacity
         style={[styles.button, loading && styles.buttonDisabled]}
-        onPress={alert("press button")}
+        onPress={handleConvert}
         disabled={loading}
       >
         {loading ? (
