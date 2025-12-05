@@ -157,14 +157,15 @@ const validateInputs = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    padding: 5,
+    backgroundColor: '#e6f7e9ff',
   },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 16,
+    
   },
   title: {
     fontSize: 22,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 12,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#83f89aff',
     paddingVertical: 12,
     borderRadius: 6,
     alignItems: 'center',
