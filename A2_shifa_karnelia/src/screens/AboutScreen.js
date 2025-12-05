@@ -8,6 +8,15 @@ const AboutScreen = () => {
       <Text style={styles.studentId}>Student ID: 101487402</Text>
       <Text style={styles.name}>Name:- sana karnleia</Text>
       <Text style={styles.studentId}>Student ID: 101487075</Text>
+       <Text>About This Application</Text>
+      <Text >
+        This application converts an amount from one currency to another using
+        live exchange rates from FreeCurrencyAPI. The user enters a base
+        currency code, a destination currency code, and an amount. The app
+        validates the inputs, sends a request to the API, handles potential
+        errors such as invalid codes or network problems, and displays the
+        exchange rate and converted amount when the request is successful.
+      </Text>
     </View>
      );
 
